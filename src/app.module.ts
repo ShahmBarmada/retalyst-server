@@ -9,7 +9,7 @@ import { AreasModule } from './areas/areas.module';
 import { AddressesModule } from './addresses/addresses.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
-import { DelivrulesModule } from './delivrules/delivrules.module';
+import { RoutesModule } from './routes/routes.module';
 import { OprtypesModule } from './oprtypes/oprtypes.module';
 import { OprstatesModule } from './oprstates/oprstates.module';
 import { OperationsModule } from './operations/operations.module';
@@ -26,7 +26,7 @@ import { VouchersModule } from './vouchers/vouchers.module';
     AddressesModule,
     CategoriesModule,
     ProductsModule,
-    DelivrulesModule,
+    RoutesModule,
     OprtypesModule,
     OprstatesModule,
     OperationsModule,

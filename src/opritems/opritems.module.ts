@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { OpritemsService } from './opritems.service';
 import { OpritemsController } from './opritems.controller';
-
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { OprItems } from 'src/database/entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([OprItems])],
+  imports: [MikroOrmModule.forFeature([OprItems])],
   controllers: [OpritemsController],
   providers: [OpritemsService],
-  exports: [TypeOrmModule],
+  exports: [MikroOrmModule],
 })
 export class OpritemsModule {}

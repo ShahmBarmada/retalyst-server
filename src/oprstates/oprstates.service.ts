@@ -1,33 +1,40 @@
 import { Injectable } from '@nestjs/common';
-
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { EntityRepository, EntityManager, wrap } from '@mikro-orm/postgresql';
+import { OprStates } from 'src/database/entities';
 import { CreateOprstateDto } from './dto/create-oprstate.dto';
 import { UpdateOprstateDto } from './dto/update-oprstate.dto';
 
 @Injectable()
 export class OprstatesService {
   constructor(
+    private em: EntityManager,
     @InjectRepository(OprStates)
-    private oprStatesRepository: Repository<OprStates>,
+    private repo: EntityRepository<OprStates>,
   ) {}
-  async create(createOprstateDto: CreateOprstateDto) {
-    return await this.oprStatesRepository.save(createOprstateDto);
-  }
 
   async findAll() {
-    return await this.oprStatesRepository.find();
+    return await this.repo.findAll();
   }
 
-  async findOne(id: number) {
-    return await this.oprStatesRepository.findOneBy({ id });
+  async findOneById(id: number) {
+    return await this.repo.findOne({ opst_id: id });
+  }
+
+  async create(createOprstateDto: CreateOprstateDto) {
+    const newEntry = this.repo.create(createOprstateDto);
+    await this.em.persistAndFlush(newEntry);
+    return newEntry;
   }
 
   async update(id: number, updateOprstateDto: UpdateOprstateDto) {
-    const toUpdate = await this.oprStatesRepository.findOneBy({ id });
-    const updated = Object.assign(toUpdate, updateOprstateDto);
-    return await this.oprStatesRepository.save(updated);
+    const updateEntry = await this.repo.findOneOrFail({ opst_id: id });
+    wrap(updateEntry).assign(updateOprstateDto);
+    await this.em.flush();
+    return updateEntry;
   }
 
   async remove(id: number) {
-    return await this.oprStatesRepository.delete(id);
+    return await this.repo.nativeDelete({ opst_id: id });
   }
 }

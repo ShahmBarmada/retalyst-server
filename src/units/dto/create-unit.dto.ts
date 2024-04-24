@@ -1,5 +1,5 @@
 export class CreateUnitDto {
-  public name: string;
-  public abb: string;
-  public rounding: boolean;
+  unit_name!: string;
+  unit_abb!: string;
+  unit_rnd!: boolean;
 }

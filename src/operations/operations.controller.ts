@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
 } from '@nestjs/common';
@@ -16,22 +16,22 @@ export class OperationsController {
   constructor(private readonly operationsService: OperationsService) {}
 
   @Post()
-  create(@Body() createOperationDto: CreateOperationDto) {
+  async create(@Body() createOperationDto: CreateOperationDto) {
     return this.operationsService.create(createOperationDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.operationsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.operationsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.operationsService.findOneById(+id);
   }
 
-  @Patch(':id')
-  update(
+  @Put(':id')
+  async update(
     @Param('id') id: string,
     @Body() updateOperationDto: UpdateOperationDto,
   ) {
@@ -39,7 +39,7 @@ export class OperationsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.operationsService.remove(+id);
   }
 }

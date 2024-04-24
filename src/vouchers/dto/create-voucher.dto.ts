@@ -1,6 +1,7 @@
 export class CreateVoucherDto {
-  public value: string;
-  public start: string;
-  public end: string;
-  public desc: string;
+  voch_str!: string;
+  voch_start!: string;
+  voch_end!: string;
+  voch_desc!: string;
+  voch_config?: object;
 }

@@ -1,4 +1,4 @@
 export class CreateRoleDto {
-  public desc: string;
-  public permissions: object;
+  role_desc!: string;
+  role_perms?: object;
 }

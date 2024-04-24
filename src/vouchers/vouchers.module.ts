@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { VouchersService } from './vouchers.service';
 import { VouchersController } from './vouchers.controller';
-
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { Vouchers } from 'src/database/entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Vouchers])],
+  imports: [MikroOrmModule.forFeature([Vouchers])],
   controllers: [VouchersController],
   providers: [VouchersService],
-  exports: [TypeOrmModule],
+  exports: [MikroOrmModule],
 })
 export class VouchersModule {}

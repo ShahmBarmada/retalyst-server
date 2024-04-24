@@ -1,16 +1,16 @@
-import { Addresses } from 'src/addresses/entities/addresses.entity';
-import { OprStates } from 'src/oprstates/entities/oprstates.entity';
-import { OprTypes } from 'src/oprtypes/entities/oprtypes.entity';
-import { Users } from 'src/users/entities/users.entity';
+import { OprTypes, OprStates, Users, Addresses } from 'src/database/entities';
 
 export class CreateOperationDto {
-  public created: string;
-  public due: string;
-  public period: number;
-  public vouchers: string[];
-  public type: OprTypes;
-  public state: OprStates;
-  public client: Users;
-  public employee: Users;
-  public address: Addresses;
+  oper_type: OprTypes;
+  oper_state: OprStates;
+  oper_created!: string;
+  oper_due?: string;
+  oper_fin?: string;
+  oper_period!: number;
+  oper_client: Users;
+  oper_addr: Addresses;
+  oper_sales: Users;
+  oper_delivery?: Users;
+  oper_note?: string;
+  oper_vouchers?: string[];
 }

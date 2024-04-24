@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
 } from '@nestjs/common';
@@ -16,27 +16,30 @@ export class VouchersController {
   constructor(private readonly vouchersService: VouchersService) {}
 
   @Post()
-  create(@Body() createVoucherDto: CreateVoucherDto) {
+  async create(@Body() createVoucherDto: CreateVoucherDto) {
     return this.vouchersService.create(createVoucherDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.vouchersService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.vouchersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.vouchersService.findOneById(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVoucherDto: UpdateVoucherDto) {
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateVoucherDto: UpdateVoucherDto,
+  ) {
     return this.vouchersService.update(+id, updateVoucherDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.vouchersService.remove(+id);
   }
 }

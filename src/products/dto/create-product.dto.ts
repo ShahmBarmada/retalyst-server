@@ -1,7 +1,13 @@
-import { Units } from 'src/units/entities/units.entity';
+import { Categories, Units } from 'src/database/entities';
 
 export class CreateProductDto {
-  public desc: string;
-  public pricecur: number;
-  public unit: Units;
+  prod_barcode!: string;
+  prod_desc!: string;
+  prod_curr!: number;
+  prod_prev!: number;
+  prod_promo!: boolean;
+  prod_actv!: boolean;
+  prod_img?: Buffer;
+  prod_ctgy: Categories;
+  prod_unit: Units;
 }

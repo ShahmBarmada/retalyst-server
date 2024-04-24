@@ -1,11 +1,13 @@
-import { Areas } from 'src/areas/entities/areas.entity';
-import { Users } from 'src/users/entities/users.entity';
+import { Areas } from 'src/database/entities';
+import { Users } from 'src/database/entities';
 
 export class CreateAddressDto {
-  public street: string;
-  public building: string;
-  public floor: number;
-  public aprt: number;
-  public area: Areas;
-  public user: Users;
+  addr_area: Areas;
+  addr_nbhd: string;
+  addr_str: string;
+  addr_bld: string;
+  addr_flr: number;
+  addr_apt: number;
+  addr_note: string;
+  addr_user: Users;
 }

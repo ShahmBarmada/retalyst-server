@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
 } from '@nestjs/common';
@@ -16,27 +16,30 @@ export class OpritemsController {
   constructor(private readonly opritemsService: OpritemsService) {}
 
   @Post()
-  create(@Body() createOpritemDto: CreateOpritemDto) {
+  async create(@Body() createOpritemDto: CreateOpritemDto) {
     return this.opritemsService.create(createOpritemDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.opritemsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.opritemsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return this.opritemsService.findOneById(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOpritemDto: UpdateOpritemDto) {
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateOpritemDto: UpdateOpritemDto,
+  ) {
     return this.opritemsService.update(+id, updateOpritemDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.opritemsService.remove(+id);
   }
 }

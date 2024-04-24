@@ -1,9 +1,8 @@
-import { Operations } from 'src/operations/entities/operations.entity';
-import { Products } from 'src/products/entities/products.entity';
+import { Operations, Products } from 'src/database/entities';
 
 export class CreateOpritemDto {
-  public opr: Operations;
-  public prd: Products;
-  public qty: number;
-  public price: number;
+  opit_prod: Products;
+  opit_oper: Operations;
+  opit_qty!: number;
+  opit_val!: number;
 }

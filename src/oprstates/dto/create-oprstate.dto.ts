@@ -1,4 +1,4 @@
 export class CreateOprstateDto {
-  public desc: string;
-  public mp: number;
+  opst_desc!: string;
+  opst_mp!: number;
 }

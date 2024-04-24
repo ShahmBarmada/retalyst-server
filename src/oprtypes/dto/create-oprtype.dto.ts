@@ -1,4 +1,4 @@
 export class CreateOprtypeDto {
-  public desc: string;
-  public mp: number;
+  opty_desc!: string;
+  opty_mp!: number;
 }

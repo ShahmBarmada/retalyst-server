@@ -1,32 +1,40 @@
 import { Injectable } from '@nestjs/common';
-
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { EntityRepository, EntityManager, wrap } from '@mikro-orm/postgresql';
+import { Units } from 'src/database/entities';
 import { CreateUnitDto } from './dto/create-unit.dto';
 import { UpdateUnitDto } from './dto/update-unit.dto';
 
 @Injectable()
 export class UnitsService {
   constructor(
-    @InjectRepository(Units) private unitsRepository: Repository<Units>,
+    private em: EntityManager,
+    @InjectRepository(Units)
+    private repo: EntityRepository<Units>,
   ) {}
-  async create(createUnitDto: CreateUnitDto) {
-    return await this.unitsRepository.save(createUnitDto);
-  }
 
   async findAll() {
-    return await this.unitsRepository.find();
+    return await this.repo.findAll();
   }
 
-  async findOne(id: number) {
-    return await this.unitsRepository.findOneBy({ id });
+  async findOneById(id: number) {
+    return await this.repo.findOne({ unit_id: id });
+  }
+
+  async create(createUnitDto: CreateUnitDto) {
+    const newEntry = this.repo.create(createUnitDto);
+    await this.em.persistAndFlush(newEntry);
+    return newEntry;
   }
 
   async update(id: number, updateUnitDto: UpdateUnitDto) {
-    const toUpdate = await this.unitsRepository.findOneBy({ id });
-    const updated = Object.assign(toUpdate, updateUnitDto);
-    return await this.unitsRepository.save(updated);
+    const updateEntry = await this.repo.findOneOrFail({ unit_id: id });
+    wrap(updateEntry).assign(updateUnitDto);
+    await this.em.flush();
+    return updateEntry;
   }
 
   async remove(id: number) {
-    return await this.unitsRepository.delete(id);
+    return await this.repo.nativeDelete({ unit_id: id });
   }
 }
