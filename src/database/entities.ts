@@ -50,7 +50,7 @@ export class Users {
   @Property({ type: 'timestamp', length: 0, nullable: true })
   user_deleted?: string;
 
-  @ManyToOne(() => Roles)
+  @ManyToOne(() => Roles, { fieldName: 'user_role' })
   user_role: Roles;
 }
 
@@ -86,7 +86,7 @@ export class Addresses {
   @PrimaryKey()
   addr_id!: number;
 
-  @ManyToOne(() => Areas)
+  @ManyToOne(() => Areas, { fieldName: 'addr_area' })
   addr_area: Areas;
 
   @Property({ type: 'varchar', length: 30, nullable: true })
@@ -107,7 +107,7 @@ export class Addresses {
   @Property({ type: 'varchar', length: 125, nullable: true })
   addr_note?: string;
 
-  @ManyToOne(() => Users)
+  @ManyToOne(() => Users, { fieldName: 'addr_user' })
   addr_user: Users;
 }
 
@@ -137,7 +137,7 @@ export class Routes {
   @Property({ type: 'boolean', default: false })
   rout_actv!: boolean;
 
-  @ManyToOne(() => Areas)
+  @ManyToOne(() => Areas, { fieldName: 'rout_area' })
   rout_area: Areas;
 }
 
@@ -207,10 +207,10 @@ export class Products {
   @Property({ type: 'bytea', nullable: true })
   prod_img?: Buffer;
 
-  @ManyToOne(() => Categories)
+  @ManyToOne(() => Categories, { fieldName: 'prod_ctgy' })
   prod_ctgy: Categories;
 
-  @ManyToOne(() => Units)
+  @ManyToOne(() => Units, { fieldName: 'prod_unit' })
   prod_unit: Units;
 }
 
@@ -243,10 +243,10 @@ export class Operations {
   @PrimaryKey()
   oper_id!: number;
 
-  @ManyToOne(() => OprTypes)
+  @ManyToOne(() => OprTypes, { fieldName: 'oper_type' })
   oper_type: OprTypes;
 
-  @ManyToOne(() => OprStates)
+  @ManyToOne(() => OprStates, { fieldName: 'oper_state' })
   oper_state: OprStates;
 
   @Property({ type: 'timestamp', length: 0 })
@@ -261,16 +261,16 @@ export class Operations {
   @Property({ type: 'smallint' })
   oper_period!: number;
 
-  @ManyToOne(() => Users)
+  @ManyToOne(() => Users, { fieldName: 'oper_client' })
   oper_client: Users;
 
-  @ManyToOne(() => Addresses)
+  @ManyToOne(() => Addresses, { fieldName: 'oper_addr' })
   oper_addr: Addresses;
 
-  @ManyToOne(() => Users)
+  @ManyToOne(() => Users, { fieldName: 'oper_sales' })
   oper_sales: Users;
 
-  @ManyToOne(() => Users, { nullable: true })
+  @ManyToOne(() => Users, { fieldName: 'oper_delivery', nullable: true })
   oper_delivery?: Users;
 
   @Property({ type: 'varchar', length: 125, nullable: true })
@@ -285,10 +285,10 @@ export class OprItems {
   @PrimaryKey()
   opit_id!: number;
 
-  @ManyToOne(() => Products)
+  @ManyToOne(() => Products, { fieldName: 'opit_prod' })
   opit_prod: Products;
 
-  @ManyToOne(() => Operations)
+  @ManyToOne(() => Operations, { fieldName: 'opit_oper' })
   opit_oper: Operations;
 
   @Property({ type: 'numeric', precision: 4, scale: 2 })
