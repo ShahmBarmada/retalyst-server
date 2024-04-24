@@ -173,8 +173,8 @@ export class Units {
   @Property({ type: 'varchar', length: 5 })
   unit_abb!: string;
 
-  @Property({ type: 'boolean', default: true })
-  unit_rnd!: boolean;
+  @Property({ type: 'smallint', default: 0 })
+  unit_rnd!: number;
 }
 
 @Entity()
