@@ -399,3 +399,4 @@ dist
 migrations
 .webpack
 .serverless/**/*.zip
+yarn.lock
