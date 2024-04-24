@@ -17,7 +17,7 @@ export class UsersService {
     return await this.repo.findAll();
   }
 
-  async findOneById(id: number) {
+  async findOneById(id: number): Promise<Users | undefined> {
     return await this.repo.findOne({ user_id: id });
   }
 

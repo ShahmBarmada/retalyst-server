@@ -8,6 +8,6 @@ import { Users } from 'src/database/entities';
   imports: [MikroOrmModule.forFeature([Users])],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [MikroOrmModule],
+  exports: [MikroOrmModule, UsersService],
 })
 export class UsersModule {}
