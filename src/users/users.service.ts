@@ -21,6 +21,10 @@ export class UsersService {
     return await this.repo.findOne({ user_id: id });
   }
 
+  async findOneByPhone(phone: string): Promise<Users | undefined> {
+    return await this.repo.findOne({ user_phone: phone });
+  }
+
   async create(createUserDto: CreateUserDto) {
     const newEntry = this.repo.create(createUserDto);
     await this.em.persistAndFlush(newEntry);
